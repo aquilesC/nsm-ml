@@ -2,7 +2,6 @@ import numpy as np
 from scipy.signal import convolve2d
 import scipy
 import sys
-#sys.path.append("../deeptrack/")
 sys.path.append("deeptrack/")
 from deeptrack.models import resnetcnn
 from tensorflow.keras import models
@@ -32,8 +31,7 @@ def remove_stuck_particle_2(original_img,M,nbr_its):
         idcs = np.sum(binary_img,axis=0)==0
         cut_img = original_img[:,idcs]
         original_img = np.copy(cut_img)
-    #plt.figure()
-    #plt.imshow(original_img,aspect='auto')
+
     return np.expand_dims(original_img,(0,-1))
 
 def _compile(model: models.Model, 
@@ -157,15 +155,9 @@ def predict_function(ensemble,img,img_diff,intensity,diffusion):
     model = ensemble[0]["model"][indModel]
     intensity = model.predict(img)[0][0][0]
     
-    # D=np.abs(ensemble[1]["prop"]-np.sqrt(diffusion/57))
-    # D=np.abs(ensemble[1]["prop"]**2*57-diffusion)
-    # indModel = np.where(D==np.min(D))[0][0]
-    # model = ensemble[1]["model"][indModel]
-    # diffusion = model.predict(img_diff)[0][0][0]**2*57
-    
     if diffusion < 15:
         model = ensemble[1]["model"][0]
-    elif diffusion < 25:
+    elif diffusion < 30:
         model = ensemble[1]["model"][1]
     else:
         model = ensemble[1]["model"][2]

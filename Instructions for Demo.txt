@@ -1,12 +1,12 @@
 1. System Requirements
 Code tested on:
-Microsoft Windows 10, Version 20H2 Build 19042.928
+Microsoft Windows 10, Version 20H2 Build 19042.928, Version 21H2 Build 19044.1586, 
 Microsoft Windows 11, Version 21H2 Build 22000.556
 Linux .... (gustaf?)
 Linux Red Hat 7, version ???
 
 Software dependencies are:
-Python v3.8, specific packages are found in environment.yml
+Python v3.8, specific packages are found in environment2.yml
 
 ---------------------------------
 
@@ -14,19 +14,26 @@ Python v3.8, specific packages are found in environment.yml
 
 Step 1. Installation
 Install the package dependencies, ideally using conda environment manager, e.g. through the command:
-conda env create -f environment.yml
+conda env create -f environment2.yml
 Install time: ~5 minutes on a regular Windows desktop
 
+Step 2. Data Download
+Please download the sample dataset included for this demo from:
+https://chalmers-my.sharepoint.com/:f:/g/personal/hmoberg_chalmers_se/ElpFotTfPNNInU2YghmGN3IBs5cPPgMxjsdPwtsXserlYA?e=53WB9a
+And place the folder "Demo Data" in directory NSM-ML/Data/
+This data corresponds to the artificial dataset used for Fig. S14.
+
 Step 2. Pre-processing
-Run pre-processImages.py. This will pre-process the sample dataset found in Data/Demo Data, corresponding to the artificial dataset used for Fig. S19.
-and save its results in Data/Preprocessed Sample Data. 
+Run pre-processImages.py. This will pre-process the sample dataset found in Data/Demo Data. and save its results in Data/Preprocessed Sample Data
 Run time: ~30 minutes on a regular Windows desktop
 
 Step 3. Analysis
-Run PredictDemo.py. 
-Run time: ~30 minutes on a regular Windows desktop
+Run PredictDemo.py. This will analyze the pre-processed sample dataset found in Data/Preprocessed Sample Data
+Run time: ~2-3 minutes on a regular Windows desktop
 
 3. Demo Explanation
+
+PredictDemo.py contains four separated cells:
 
 The first cell defines the base models used for initial iOC and Diffusivity prediction, as well as the ensemble models for more accurate values. Nothing needs changing here.
 
