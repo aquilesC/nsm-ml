@@ -31,7 +31,7 @@ mainDataPath='Data/Preprocessed Sample Data/'
 plotImages=False
 #Save images?
 saveImages = False
-#%%    
+#%% Run analysis
 plt.close('all')
 
 try:
@@ -95,7 +95,7 @@ for meas in measurements:
             ax.set_title("Segmented Image")
             ax.set_xlabel('x')
             
-            loc = plticker.MultipleLocator(base=10.0) # this locator puts ticks at regular intervals
+            loc = plticker.MultipleLocator(base=10.0)
             locY = plticker.MultipleLocator(base=100.0)
             axs[1].xaxis.set_major_locator(loc)
             axs[1].yaxis.set_major_locator(locY)
@@ -184,7 +184,7 @@ for meas in measurements:
                     stdInt = np.std([intensity,intensity_ensemble])
                     meanDiff = np.mean([diffusion,diffusion_ensemble])
                     stdDiff = np.std([diffusion,diffusion_ensemble])
-                    if stdInt>meanInt or stdDiff>meanDiff:#stdInt>intensity or stdDiff>diffusion:#stdInt > meanInt/2 or stdDiff > meanDiff:
+                    if stdInt>intensity_ensemble or stdDiff>diffusion_ensemble:
                         print("Ignoring prediction, stdInt = "+str(stdInt)+", meanInt = "+str(meanInt)+", stdDiff = "+str(stdDiff)+", meanDiff = "+str(meanDiff))
                         intensity,diffusion,intensity_ensemble,diffusion_ensemble = 0,0,0,0
                         box_h=0
@@ -198,6 +198,7 @@ for meas in measurements:
                     ax2.text(x1,y1,"I = "+str(np.round(intensity_ensemble,2))+", D = "+str(np.round(diffusion_ensemble,1)),color = "black")
                     ax2.add_patch(bbox)
 
+                #Save results in arrays
                 try:
                     intensityArray = np.append(intensityArray,intensity)  
                     diffusionArray = np.append(diffusionArray,diffusion)  

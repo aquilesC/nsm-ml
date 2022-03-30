@@ -1,4 +1,4 @@
-name: NSM-GPU
+name: NSM-GPU-TEMP
 channels:
   - defaults
 dependencies:
@@ -202,4 +202,4 @@ dependencies:
     - tifffile==2022.3.25
     - tqdm==4.63.1
     - werkzeug==2.0.3
-prefix: C:\Users\ccx55\Anaconda3\envs\NSM-GPU
+prefix: C:\Users\ccx55\Anaconda3\envs\NSM-GPU-TEMP

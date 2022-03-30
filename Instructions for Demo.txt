@@ -2,8 +2,6 @@
 Code tested on:
 Microsoft Windows 10, Version 20H2 Build 19042.928, Version 21H2 Build 19044.1586, 
 Microsoft Windows 11, Version 21H2 Build 22000.556
-Linux .... (gustaf?)
-Linux Red Hat 7, version ???
 
 Software dependencies are:
 Python v3.8, specific packages are found in environment2.yml
@@ -31,6 +29,8 @@ Step 3. Analysis
 Run PredictDemo.py. This will analyze the pre-processed sample dataset found in Data/Preprocessed Sample Data
 Run time: ~2-3 minutes on a regular Windows desktop
 
+---------------------------------
+
 3. Demo Explanation
 
 PredictDemo.py contains four separated cells:
@@ -51,6 +51,8 @@ Figure 2: Similarly, the histogram of predicted D values by the ensemble model f
 which is clearly represented in this figure with corresponding gaussian fits for greater clarity. 
 
 Figure 3: Scatter plot of iOC vs D values. It should be clear that, apart from some outliers, there are exactly 18 clusters corresponding to the 18 permutations of the 6 iOC values and 3 D values in the dataset.
+
+---------------------------------
 
 4. Further Software
 
