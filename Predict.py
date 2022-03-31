@@ -55,18 +55,19 @@ def reload_resnet():
     return resnet
 
 #Load models
-unet_path = "../../input/nsm-network-weights/U-Net- I0.01-25_loss_0.009943331.h5" #Normal segmentation model
-unet_path_EV="../../input/nsm-network-weights/U-Net-I0.02-100_loss_0.005466693_EV.h5" #Segmentation model used for high-iOC particles in large channels
+unet_path = "Network-weights/U-Net- I0.01-25_loss_0.009943331.h5" #Normal segmentation model
+unet_path_EV="Network-weights/U-Net-I0.02-100_loss_0.005466693_EV.h5" #Segmentation model used for high-iOC particles in large channels
 
-resnet_diffusion_path='../../input/nsm-network-weights/resnet-diffusion-09062021-0734012048x128_combinedLoss.h5' #Normal diffusion model
-resnet_diffusion_path_EV='../../input/nsm-network-weights/resnet-diffusion-21072021-054520512x128_EV_combinedLoss.h5' #EV diff model
+resnet_diffusion_path='Network-weights/resnet-diffusion-09062021-0734012048x128_combinedLoss.h5' #Normal diffusion model
+resnet_diffusion_path_EV='Network-weights/resnet-diffusion-21072021-054520512x128_EV_combinedLoss.h5' #EV diff model
 
-resnet_intensity_path='../../input/nsm-network-weights/resnet-D0.1-1.15 I0.01-25 128x128_loss_5.546048.h5' #Normal int model
-resnet_intensity_path_EV = "../../input/nsm-network-weights/resnet-D0.05-1.15 I0.5-1000 512x512_loss_104.02502.h5" #EV int model
+resnet_intensity_path='Network-weights/resnet-D0.1-1.15 I0.01-25 128x128_loss_5.546048.h5' #Normal int model
+resnet_intensity_path_EV = "Network-weights/resnet-D0.05-1.15 I0.5-1000 512x512_loss_104.02502.h5" #EV int model
 
 resnet_intensity=reload_resnet()
 resnet_diffusion=reload_resnet()
 
+#If doing exosome analysis, load ..._EV models here instead. 
 unet = tf.keras.models.load_model(unet_path,compile=False)
 resnet_intensity.load_weights(resnet_intensity_path)
 resnet_diffusion.load_weights(resnet_diffusion_path)
@@ -75,17 +76,15 @@ resnet_diffusion.load_weights(resnet_diffusion_path)
 #%% Enter user variables
 
 #Path to 
-mainDataPath='../../input/exosomes/2021-04-29-exosome'
+mainDataPath='Data/...'
 #Experimental or simulated data?
 experimental_data=True
-#EV data?
-exosomes=True
 #Plot data?
 plot=True
 #Save images?
 savePredDiff = False
-#Minimal accepted trajectory length
-minImgArea = 0
+#Minimal accepted trajectory length (FCNN downsamples 5 times -> minimal accepted length is 2^5=32)
+minImgArea = 32
 #%%    
 
 try:
@@ -187,7 +186,7 @@ for meas in measurements:
             #     np.save("output/"+fileName,pred_diff[0,:,:,0])
             
 
-        YOLOLabels = manYOLO(pred_diff)
+        YOLOLabels = manYOLO(pred_diff,trajTreshold=16)
 
         #YOLOLabels = manYOLOSplit(pred_diff)
     

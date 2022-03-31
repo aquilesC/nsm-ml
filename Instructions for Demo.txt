@@ -14,6 +14,9 @@ Step 1. Installation
 Install the package dependencies, ideally using conda environment manager, e.g. through the command:
 conda env create -f environment2.yml
 Install time: ~5 minutes on a regular Windows desktop
+If this does not work on your system, an alternative is to run
+pip install -r requirements.txt
+
 
 Step 2. Data Download
 Please download the sample dataset included for this demo from:
@@ -57,7 +60,8 @@ Figure 3: Scatter plot of iOC vs D values. It should be clear that, apart from s
 4. Further Software
 
 Predict.py contains the basic prediction script used in our lab for quick real-time analysis. For optimal results, an ensemble of models should be selected and fine-tuned
-for the particular D/iOC values and noise parameters relevant in any given problem, as was for instance the case for exosome analysis.
+for the particular D/iOC values and noise parameters relevant in any given problem, as was for instance the case for exosome analysis. The YOLO
+should also be trained and used if the segmentations are imperfect (i.e. if the noise is only partially corrected for). 
 
 
 
