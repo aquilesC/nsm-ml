@@ -2,6 +2,7 @@
 Code tested on:
 Microsoft Windows 10, Version 20H2 Build 19042.928, Version 21H2 Build 19044.1586, 
 Microsoft Windows 11, Version 21H2 Build 22000.556
+Devuan GNU/Linux 4 (chimaera) 5.10.0-13-amd64 (use requirements.txt)
 
 Software dependencies are:
 Python v3.8, specific packages are found in environment2.yml
@@ -14,7 +15,7 @@ Step 1. Installation
 Install the package dependencies, ideally using conda environment manager, e.g. through the command:
 conda env create -f environment2.yml
 Install time: ~5 minutes on a regular Windows desktop
-If this does not work on your system, an alternative is to run
+If this does not work on your system, or you wish to use Linux, an alternative is to run
 pip install -r requirements.txt
 
 
@@ -22,14 +23,14 @@ Step 2. Data Download
 Please download the sample dataset included for this demo from:
 https://chalmers-my.sharepoint.com/:f:/g/personal/hmoberg_chalmers_se/ElpFotTfPNNInU2YghmGN3IBs5cPPgMxjsdPwtsXserlYA?e=53WB9a
 And place the folder "Demo Data" in directory NSM-ML/Data/
-This data corresponds to the artificial dataset used for Fig. S14.
+This data corresponds to the artificial dataset used for Fig. S14, and is ~4.5GB in size.
 
 Step 2. Pre-processing
 Run pre-processImages.py. This will pre-process the sample dataset found in Data/Demo Data. and save its results in Data/Preprocessed Sample Data
 Run time: ~30 minutes on a regular Windows desktop
 
 Step 3. Analysis
-Run PredictDemo.py. This will analyze the pre-processed sample dataset found in Data/Preprocessed Sample Data
+Run PredictDemo.py. This will analyze the pre-processed sample dataset found in Data/Preprocessed Sample Data, and save the resulting figures in Results/.
 Run time: ~2-3 minutes on a regular Windows desktop
 
 ---------------------------------
