@@ -225,6 +225,11 @@ intensityEnsembleArray= intensityEnsembleArray[intensityEnsembleArray>0]
 diffusionEnsembleArray= diffusionEnsembleArray[diffusionEnsembleArray>0]
 countArray=countArray[countArray>0]
 
+try:
+    os.mkdir("Results")
+except:
+    pass
+
 from scipy.optimize import curve_fit
 from pylab import hist, exp, sqrt, diag, plot, legend
 def gauss(x,mu,sigma,A):
@@ -260,7 +265,10 @@ for i in range(0,len(iOCRange)):
     
     print('peak = {:.2f}'.format(peak))
     print('width = {:.2f}'.format(sigma))
-    
+
+plt.savefig("Results/iOCHistogram")
+plt.show()
+
 #data = np.copy(diffusionEnsembleArray)
 data = [[i]*int(j) for i,j in zip(diffusionEnsembleArray,countArray)]
 data = np.concatenate(data).ravel()
@@ -281,7 +289,7 @@ for i in range(0,len(DRange)):
     print('expected width = {:.2f}'.format(expected_width))
     params,cov=curve_fit(gauss,x,y,expected)
     sigma=sqrt(diag(cov))
-    plot(x,gauss(x,*params),lw=2,label='Gaussian fit, D='+str(iOCRange[i])+"$\mu m^2/s$")
+    plot(x,gauss(x,*params),lw=2,label='Gaussian fit, D='+str(DRange[i])+"$\mu m^2/s$")
     plt.xlabel("D ($\mu m^2/s$)")
     plt.ylabel("#Frames")
     peak = params[0]
@@ -295,6 +303,8 @@ for i in range(0,len(DRange)):
     print('peak = {:.2f}'.format(peak))
     print('width = {:.2f}'.format(sigma))
 
+plt.savefig("Results/DHistogram")
+plt.show()
 
 points=list(set(zip(intensityEnsembleArray,diffusionEnsembleArray))) 
 plot_x=[i[0] for i in points]
@@ -308,6 +318,7 @@ plt.yscale('log')
 plt.title("iOC vs D scatter-plot")
 plt.ylim(0,100)
 plt.gca().invert_yaxis()
-
+plt.savefig("Results/Scatter_plot")
+plt.show()
 
 
